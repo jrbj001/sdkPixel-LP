@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Brain, Layers, MessageSquare, Network, Sparkles, Workflow, LineChart, Shield } from "lucide-react";
+import { ArrowRight, Brain, Layers, MessageSquare, Network, Sparkles, Workflow, LineChart, Shield, Database, Cpu, Zap, Target } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const Section = ({ id, title, kicker, children }:{
@@ -31,6 +31,167 @@ const Section = ({ id, title, kicker, children }:{
       {kicker && <p className="text-pulse-cyan/80 text-sm tracking-widest uppercase mb-3">{kicker}</p>}
       <h2 className="text-3xl md:text-5xl font-semibold mb-8">{title}</h2>
       <div className="text-slate-300 text-lg leading-relaxed">{children}</div>
+    </section>
+  );
+};
+
+const SDKProcessAnimation = () => {
+  const [currentStep, setCurrentStep] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    const element = document.getElementById('sdk-process');
+    if (element) {
+      observer.observe(element);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+    
+    const interval = setInterval(() => {
+      setCurrentStep((prev) => (prev + 1) % 5);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [isVisible]);
+
+  const processSteps = [
+    {
+      title: "Data Ingestion",
+      description: "Raw data flows into the system",
+      icon: <Database className="h-8 w-8" />,
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      title: "Vector Embedding",
+      description: "Data transforms into semantic vectors",
+      icon: <Network className="h-8 w-8" />,
+      color: "from-cyan-500 to-purple-500"
+    },
+    {
+      title: "RAG Processing",
+      description: "Hybrid retrieval with business rules",
+      icon: <Brain className="h-8 w-8" />,
+      color: "from-purple-500 to-pink-500"
+    },
+    {
+      title: "LoRA Adaptation",
+      description: "Lightweight model fine-tuning",
+      icon: <Cpu className="h-8 w-8" />,
+      color: "from-pink-500 to-red-500"
+    },
+    {
+      title: "Continuous Learning",
+      description: "DPO feedback loop optimization",
+      icon: <Zap className="h-8 w-8" />,
+      color: "from-red-500 to-orange-500"
+    }
+  ];
+
+  return (
+    <section id="sdk-process" className="max-w-6xl mx-auto px-6 md:px-8 py-20 md:py-32">
+      <div className="text-center mb-16">
+        <p className="text-pulse-cyan/80 text-sm tracking-widest uppercase mb-3">Live Demo</p>
+        <h2 className="text-3xl md:text-5xl font-semibold mb-6">
+          How <span className="grad">PixelPulse SDK</span> Works
+        </h2>
+        <p className="text-slate-300 text-lg max-w-3xl mx-auto">
+          See in real-time how our algorithms process data and learn continuously
+        </p>
+      </div>
+
+      <div className="sdk-process-container">
+        {/* Neural Network Visualization */}
+        <div className="neural-network mb-12">
+          <div className="neuron"></div>
+          <div className="neuron"></div>
+          <div className="neuron"></div>
+          <div className="neuron"></div>
+          <div className="neuron"></div>
+          <div className="neuron"></div>
+          <div className="connection-line"></div>
+          <div className="connection-line"></div>
+          <div className="connection-line"></div>
+          <div className="connection-line"></div>
+          <div className="connection-line"></div>
+        </div>
+
+        {/* Process Timeline */}
+        <div className="process-timeline">
+          {processSteps.map((step, index) => (
+            <div
+              key={index}
+              className={`timeline-item ${currentStep === index ? 'active' : ''}`}
+            >
+              <div className="flex items-center gap-4 mb-3">
+                <div className={`p-3 bg-gradient-to-r ${step.color} rounded-xl`}>
+                  {step.icon}
+                </div>
+                <h3 className="text-xl font-semibold">{step.title}</h3>
+              </div>
+              <p className="text-slate-300">{step.description}</p>
+            </div>
+          ))}
+          
+          {/* Timeline Connectors */}
+          <div className="timeline-connector" style={{ top: '100px' }}></div>
+          <div className="timeline-connector" style={{ top: '250px' }}></div>
+        </div>
+
+        {/* Learning Loop */}
+        <div className="learning-loop">
+          <div className="central-hub"></div>
+          <div className="loop-step">Data</div>
+          <div className="loop-step">Process</div>
+          <div className="loop-step">Learn</div>
+          <div className="loop-step">Adapt</div>
+        </div>
+
+        {/* Data Flow Particles */}
+        {Array.from({ length: 10 }).map((_, i) => (
+          <div
+            key={i}
+            className="data-flow"
+            style={{
+              top: `${20 + (i * 8)}%`,
+              animationDelay: `${i * 0.3}s`,
+              animationDuration: `${3 + Math.random() * 2}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Interactive Controls */}
+      <div className="mt-16 text-center">
+        <div className="flex justify-center gap-4 mb-8">
+          {processSteps.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentStep(index)}
+              className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                currentStep === index 
+                  ? 'bg-pulse-cyan scale-125' 
+                  : 'bg-slate-600 hover:bg-slate-500'
+              }`}
+            />
+          ))}
+        </div>
+        <p className="text-slate-400 text-sm">
+          Click the dots to navigate through the process • Auto-animation active
+        </p>
+      </div>
     </section>
   );
 };
@@ -176,6 +337,9 @@ export default function Page() {
         </div>
       </Section>
 
+      {/* SDK PROCESS ANIMATION */}
+      <SDKProcessAnimation />
+
       {/* HOW (TECH DNA) */}
       <Section id="blueprint" title="Technical Blueprint" kicker="Serverless by design">
         <div className="grid md:grid-cols-2 gap-6 mt-8">
@@ -283,7 +447,7 @@ export default function Page() {
         <div className="card p-12 text-center hover:scale-105 transition-all duration-300">
           <h3 className="text-2xl font-semibold mb-6">Ready to build adaptive intelligence into your data?</h3>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="mailto:contact@pixelpulselab.dev" className="inline-flex items-center gap-2 rounded-xl px-8 py-4 bg-gradient-to-r from-pulse-cyan to-pulse-purple text-black font-semibold hover:shadow-lg hover:shadow-pulse-cyan/25 transition-all duration-300">
+            <a href="mailto:ze@pixelpulselab.dev" className="inline-flex items-center gap-2 rounded-xl px-8 py-4 bg-gradient-to-r from-pulse-cyan to-pulse-purple text-black font-semibold hover:shadow-lg hover:shadow-pulse-cyan/25 transition-all duration-300">
               Request Access <ArrowRight className="h-5 w-5" />
             </a>
             <a href="#blueprint" className="inline-flex items-center gap-2 rounded-xl px-8 py-4 border border-white/15 hover:bg-white/5 hover:border-white/25 transition-all duration-300">
