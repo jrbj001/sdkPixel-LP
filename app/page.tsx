@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Brain, Layers, MessageSquare, Network, Sparkles, Workflow, LineChart, Shield, Database, Cpu, Zap, Target, Bot, TrendingUp, BarChart3, Users, DollarSign, AlertTriangle, CheckCircle, Lightbulb } from "lucide-react";
+import { ArrowRight, Brain, Layers, MessageSquare, Network, Sparkles, Workflow, LineChart, Shield, Database, Cpu, Zap, Target, Bot, TrendingUp, BarChart3, Users, DollarSign, AlertTriangle, CheckCircle, Lightbulb, Play, X, ChevronRight, ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const Section = ({ id, title, kicker, children }:{
@@ -505,6 +505,354 @@ const StrategicIntelligenceExperience = () => {
   );
 };
 
+const WebSummitDemoAnimation = () => {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [currentPhase, setCurrentPhase] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [animationDirection, setAnimationDirection] = useState<'horizontal' | 'vertical'>('horizontal');
+
+  const phases = [
+    {
+      id: 'data-ingestion',
+      title: 'Data Ingestion',
+      subtitle: 'Multi-source data flows',
+      icon: <Database className="h-12 w-12" />,
+      color: 'from-blue-500 to-cyan-500',
+      description: 'Raw data from APIs, databases, files, and real-time streams',
+      dataTypes: ['APIs', 'Databases', 'Files', 'Streams', 'IoT', 'Social'],
+      visual: 'data-flow'
+    },
+    {
+      id: 'vector-embedding',
+      title: 'Vector Embedding',
+      subtitle: 'Semantic understanding',
+      icon: <Network className="h-12 w-12" />,
+      color: 'from-cyan-500 to-purple-500',
+      description: 'Transform unstructured data into semantic vectors',
+      dataTypes: ['Text', 'Images', 'Audio', 'Structured', 'Time-series'],
+      visual: 'neural-network'
+    },
+    {
+      id: 'adaptive-layer',
+      title: 'Adaptive Layer',
+      subtitle: 'Hybrid RAG + LoRA + DPO',
+      icon: <Brain className="h-12 w-12" />,
+      color: 'from-purple-500 to-pink-500',
+      description: 'Continuous learning with explainable reasoning',
+      dataTypes: ['RAG', 'LoRA', 'DPO', 'Feedback', 'Learning'],
+      visual: 'adaptive-processing'
+    },
+    {
+      id: 'strategic-intelligence',
+      title: 'Strategic Intelligence',
+      subtitle: 'Conversational insights',
+      icon: <MessageSquare className="h-12 w-12" />,
+      color: 'from-pink-500 to-red-500',
+      description: 'Natural language questions and strategic recommendations',
+      dataTypes: ['Questions', 'Insights', 'Recommendations', 'Predictions'],
+      visual: 'intelligence-output'
+    }
+  ];
+
+  const startAnimation = () => {
+    setIsFullscreen(true);
+    setIsAnimating(true);
+    setCurrentPhase(0);
+    
+    const interval = setInterval(() => {
+      setCurrentPhase((prev) => {
+        if (prev >= phases.length - 1) {
+          clearInterval(interval);
+          setIsAnimating(false);
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 3000);
+  };
+
+  const closeAnimation = () => {
+    setIsFullscreen(false);
+    setIsAnimating(false);
+    setCurrentPhase(0);
+  };
+
+  if (!isFullscreen) {
+    return (
+      <section className="max-w-6xl mx-auto px-6 md:px-8 py-20 md:py-32">
+        <div className="text-center mb-16">
+          <p className="text-pulse-cyan/80 text-sm tracking-widest uppercase mb-3">Web Summit Demo</p>
+          <h2 className="text-3xl md:text-5xl font-semibold mb-6">
+            Experience the <span className="grad">Complete Journey</span>
+          </h2>
+          <p className="text-slate-300 text-lg max-w-3xl mx-auto mb-8">
+            Watch our adaptive intelligence transform raw data into strategic insights in real-time
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <button
+              onClick={() => {
+                setAnimationDirection('horizontal');
+                startAnimation();
+              }}
+              className="inline-flex items-center gap-2 rounded-xl px-8 py-4 bg-gradient-to-r from-pulse-cyan to-pulse-purple text-black font-semibold hover:shadow-lg hover:shadow-pulse-cyan/25 transition-all duration-300"
+            >
+              <Play className="h-5 w-5" />
+              Horizontal Demo
+            </button>
+            <button
+              onClick={() => {
+                setAnimationDirection('vertical');
+                startAnimation();
+              }}
+              className="inline-flex items-center gap-2 rounded-xl px-8 py-4 border border-white/15 hover:bg-white/5 hover:border-white/25 transition-all duration-300"
+            >
+              <Play className="h-5 w-5" />
+              Vertical Demo
+            </button>
+          </div>
+          
+          <p className="text-slate-400 text-sm">
+            Full-screen immersive experience • Perfect for WebSummit presentations
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm">
+      {/* Close Button */}
+      <button
+        onClick={closeAnimation}
+        className="absolute top-6 right-6 z-60 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300"
+      >
+        <X className="h-6 w-6 text-white" />
+      </button>
+
+      {/* Animation Direction Toggle */}
+      <div className="absolute top-6 left-6 z-60">
+        <div className="flex bg-white/10 rounded-lg p-1">
+          <button
+            onClick={() => setAnimationDirection('horizontal')}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
+              animationDirection === 'horizontal' 
+                ? 'bg-pulse-cyan text-black' 
+                : 'text-white hover:bg-white/10'
+            }`}
+          >
+            Horizontal
+          </button>
+          <button
+            onClick={() => setAnimationDirection('vertical')}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
+              animationDirection === 'vertical' 
+                ? 'bg-pulse-cyan text-black' 
+                : 'text-white hover:bg-white/10'
+            }`}
+          >
+            Vertical
+          </button>
+        </div>
+      </div>
+
+      {/* Main Animation Container */}
+      <div className={`h-full flex items-center justify-center ${
+        animationDirection === 'horizontal' ? 'flex-row' : 'flex-col'
+      }`}>
+        
+        {/* Phase Indicators */}
+        <div className={`absolute ${
+          animationDirection === 'horizontal' 
+            ? 'top-8 left-1/2 transform -translate-x-1/2 flex flex-row gap-4' 
+            : 'left-8 top-1/2 transform -translate-y-1/2 flex flex-col gap-4'
+        }`}>
+          {phases.map((phase, index) => (
+            <div
+              key={phase.id}
+              className={`w-4 h-4 rounded-full transition-all duration-500 ${
+                currentPhase >= index 
+                  ? 'bg-pulse-cyan scale-125' 
+                  : 'bg-white/30'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Current Phase Display */}
+        <div className="text-center max-w-4xl mx-auto px-8">
+          <div className="mb-8">
+            <div className={`inline-flex items-center justify-center w-24 h-24 bg-gradient-to-r ${phases[currentPhase].color} rounded-full mb-6 animate-pulse`}>
+              {phases[currentPhase].icon}
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">
+              {phases[currentPhase].title}
+            </h1>
+            <p className="text-xl text-pulse-cyan mb-2">
+              {phases[currentPhase].subtitle}
+            </p>
+            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+              {phases[currentPhase].description}
+            </p>
+          </div>
+
+          {/* Data Types Visualization */}
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mb-12">
+            {phases[currentPhase].dataTypes.map((type, index) => (
+              <div
+                key={type}
+                className="bg-white/5 rounded-lg p-4 text-center hover:bg-white/10 transition-all duration-300"
+                style={{
+                  animationDelay: `${index * 0.1}s`,
+                  animation: isAnimating ? 'fadeInUp 0.6s ease-out forwards' : 'none'
+                }}
+              >
+                <div className="text-sm font-medium text-white">{type}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Progress Bar */}
+          <div className="w-full bg-white/10 rounded-full h-2 mb-8">
+            <div 
+              className="bg-gradient-to-r from-pulse-cyan to-pulse-purple h-2 rounded-full transition-all duration-1000"
+              style={{ width: `${((currentPhase + 1) / phases.length) * 100}%` }}
+            />
+          </div>
+
+          {/* Phase Counter */}
+          <div className="text-slate-400 text-sm">
+            Phase {currentPhase + 1} of {phases.length}
+          </div>
+        </div>
+
+        {/* Background Visual Effects */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Floating Particles */}
+          {Array.from({ length: 50 }).map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-2 h-2 bg-pulse-cyan/30 rounded-full animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 4}s`,
+                animationDuration: `${2 + Math.random() * 3}s`
+              }}
+            />
+          ))}
+
+          {/* Neural Network Lines */}
+          {phases[currentPhase].visual === 'neural-network' && (
+            <div className="absolute inset-0">
+              {Array.from({ length: 20 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-px h-20 bg-gradient-to-b from-pulse-cyan/50 to-transparent"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    transform: `rotate(${Math.random() * 360}deg)`,
+                    animation: 'neuralPulse 2s ease-in-out infinite',
+                    animationDelay: `${Math.random() * 2}s`
+                  }}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Data Flow Lines */}
+          {phases[currentPhase].visual === 'data-flow' && (
+            <div className="absolute inset-0">
+              {Array.from({ length: 15 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-1 h-32 bg-gradient-to-r from-transparent via-pulse-cyan to-transparent"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    animation: 'dataFlow 3s linear infinite',
+                    animationDelay: `${Math.random() * 3}s`
+                  }}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Adaptive Processing Circles */}
+          {phases[currentPhase].visual === 'adaptive-processing' && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="relative">
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute w-4 h-4 bg-pulse-purple rounded-full"
+                    style={{
+                      transform: `rotate(${i * 45}deg) translateX(100px)`,
+                      animation: 'adaptiveRotate 4s linear infinite',
+                      animationDelay: `${i * 0.5}s`
+                    }}
+                  />
+                ))}
+                <div className="w-8 h-8 bg-pulse-cyan rounded-full animate-pulse" />
+              </div>
+            </div>
+          )}
+
+          {/* Intelligence Output Waves */}
+          {phases[currentPhase].visual === 'intelligence-output' && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-64 h-64 border border-pulse-cyan/30 rounded-full"
+                  style={{
+                    animation: 'intelligenceWave 3s ease-out infinite',
+                    animationDelay: `${i * 0.6}s`
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Completion Message */}
+        {currentPhase === phases.length - 1 && !isAnimating && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+            <div className="text-center max-w-2xl mx-auto px-8">
+              <div className="w-32 h-32 bg-gradient-to-r from-pulse-cyan to-pulse-purple rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
+                <CheckCircle className="h-16 w-16 text-black" />
+              </div>
+              <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+                Journey Complete!
+              </h2>
+              <p className="text-xl text-slate-300 mb-8">
+                From raw data to strategic intelligence in seconds
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                  onClick={startAnimation}
+                  className="inline-flex items-center gap-2 rounded-xl px-8 py-4 bg-gradient-to-r from-pulse-cyan to-pulse-purple text-black font-semibold hover:shadow-lg hover:shadow-pulse-cyan/25 transition-all duration-300"
+                >
+                  <Play className="h-5 w-5" />
+                  Replay Demo
+                </button>
+                <button
+                  onClick={closeAnimation}
+                  className="inline-flex items-center gap-2 rounded-xl px-8 py-4 border border-white/15 hover:bg-white/5 hover:border-white/25 transition-all duration-300"
+                >
+                  <X className="h-5 w-5" />
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 export default function Page() {
   const [scrollY, setScrollY] = useState(0);
 
@@ -869,6 +1217,9 @@ export default function Page() {
 
       {/* STRATEGIC INTELLIGENCE EXPERIENCE */}
       <StrategicIntelligenceExperience />
+
+      {/* WEB SUMMIT DEMO ANIMATION */}
+      <WebSummitDemoAnimation />
 
       {/* COMPARISON */}
       <section id="comparison" className="max-w-6xl mx-auto px-6 md:px-8 py-20 md:py-32">
