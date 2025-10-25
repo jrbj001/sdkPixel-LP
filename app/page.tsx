@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Brain, Layers, MessageSquare, Network, Sparkles, Workflow, LineChart, Shield, Database, Cpu, Zap, Target, Bot, TrendingUp, BarChart3, Users, DollarSign, AlertTriangle, CheckCircle, Lightbulb } from "lucide-react";
+import { ArrowRight, Brain, Layers, MessageSquare, Network, Sparkles, Workflow, LineChart, Shield, Database, Cpu, Zap, Target, Bot, TrendingUp, BarChart3, Users, DollarSign, AlertTriangle, CheckCircle, Lightbulb, Play, X, ChevronRight, ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const Section = ({ id, title, kicker, children }:{
@@ -505,6 +505,1066 @@ const StrategicIntelligenceExperience = () => {
   );
 };
 
+const WebSummitDemoAnimation = () => {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [currentPhase, setCurrentPhase] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [animationDirection, setAnimationDirection] = useState<'horizontal' | 'vertical'>('horizontal');
+  const [selectedDataType, setSelectedDataType] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [animationInterval, setAnimationInterval] = useState<NodeJS.Timeout | null>(null);
+  const [isAnimationPaused, setIsAnimationPaused] = useState(false);
+
+  const phases = [
+    {
+      id: 'data-ingestion',
+      title: 'Data Ingestion',
+      subtitle: 'Multi-source data collection',
+      icon: <Database className="h-12 w-12" />,
+      color: 'from-blue-500 to-cyan-500',
+      description: 'Collecting raw data from multiple sources and formats',
+      dataTypes: [
+        { 
+          name: 'APIs', 
+          description: 'REST, GraphQL, Webhooks', 
+          examples: ['Salesforce', 'HubSpot', 'Stripe'],
+          details: {
+            title: 'API Data Integration',
+            description: 'Seamless integration with external services and platforms',
+            process: [
+              'Authentication and secure connection establishment',
+              'Rate limiting and error handling implementation',
+              'Data transformation and normalization',
+              'Real-time synchronization and monitoring'
+            ],
+            technologies: ['REST APIs', 'GraphQL', 'Webhooks', 'OAuth 2.0', 'JWT'],
+            benefits: ['Real-time data access', 'Automated synchronization', 'Scalable integration', 'Error resilience']
+          }
+        },
+        { 
+          name: 'Databases', 
+          description: 'SQL, NoSQL, Data Warehouses', 
+          examples: ['PostgreSQL', 'MongoDB', 'Snowflake'],
+          details: {
+            title: 'Database Connectivity',
+            description: 'Direct connection to structured and unstructured data sources',
+            process: [
+              'Connection pooling and optimization',
+              'Query optimization and indexing',
+              'Data extraction and transformation',
+              'Incremental data loading strategies'
+            ],
+            technologies: ['SQL', 'NoSQL', 'Data Warehouses', 'ETL Pipelines', 'CDC'],
+            benefits: ['High performance queries', 'Data consistency', 'Scalable storage', 'ACID compliance']
+          }
+        },
+        { 
+          name: 'Files', 
+          description: 'CSV, JSON, PDF, Excel', 
+          examples: ['Reports', 'Exports', 'Documents'],
+          details: {
+            title: 'File Processing Engine',
+            description: 'Intelligent processing of various file formats and structures',
+            process: [
+              'Format detection and validation',
+              'Content extraction and parsing',
+              'Schema mapping and transformation',
+              'Metadata extraction and indexing'
+            ],
+            technologies: ['CSV Parsers', 'PDF Extractors', 'Excel Processors', 'JSON Parsers', 'OCR'],
+            benefits: ['Multi-format support', 'Automated parsing', 'Metadata extraction', 'Content validation']
+          }
+        },
+        { 
+          name: 'Streams', 
+          description: 'Real-time data flows', 
+          examples: ['Kafka', 'Kinesis', 'Pub/Sub'],
+          details: {
+            title: 'Real-time Data Streaming',
+            description: 'Continuous processing of high-velocity data streams',
+            process: [
+              'Stream ingestion and buffering',
+              'Event processing and filtering',
+              'Real-time transformation and enrichment',
+              'Stream monitoring and alerting'
+            ],
+            technologies: ['Apache Kafka', 'AWS Kinesis', 'Google Pub/Sub', 'Apache Flink', 'Apache Storm'],
+            benefits: ['Real-time processing', 'High throughput', 'Low latency', 'Event-driven architecture']
+          }
+        },
+        { 
+          name: 'IoT', 
+          description: 'Sensor data, devices', 
+          examples: ['Temperature', 'GPS', 'Sensors'],
+          details: {
+            title: 'IoT Data Collection',
+            description: 'Integration with Internet of Things devices and sensors',
+            process: [
+              'Device registration and authentication',
+              'Sensor data collection and validation',
+              'Data preprocessing and filtering',
+              'Edge computing and local processing'
+            ],
+            technologies: ['MQTT', 'CoAP', 'LoRaWAN', 'Edge Computing', 'Time Series DB'],
+            benefits: ['Device connectivity', 'Real-time monitoring', 'Edge processing', 'Scalable device management']
+          }
+        },
+        { 
+          name: 'Social', 
+          description: 'Social media, reviews', 
+          examples: ['Twitter', 'Reviews', 'Comments'],
+          details: {
+            title: 'Social Media Integration',
+            description: 'Collection and processing of social media and review data',
+            process: [
+              'Social API authentication and rate limiting',
+              'Content extraction and sentiment analysis',
+              'User engagement metrics calculation',
+              'Trend analysis and monitoring'
+            ],
+            technologies: ['Social APIs', 'Sentiment Analysis', 'NLP', 'Graph Databases', 'Social Analytics'],
+            benefits: ['Social insights', 'Sentiment tracking', 'Engagement metrics', 'Trend analysis']
+          }
+        }
+      ],
+      visual: 'data-flow',
+      processSteps: [
+        'Data connectors establish secure connections',
+        'Raw data streams in real-time from sources',
+        'Data validation and quality checks',
+        'Initial data normalization begins'
+      ]
+    },
+    {
+      id: 'vector-embedding',
+      title: 'Vector Embedding',
+      subtitle: 'Semantic transformation',
+      icon: <Network className="h-12 w-12" />,
+      color: 'from-cyan-500 to-purple-500',
+      description: 'Converting diverse data types into semantic vector representations',
+      dataTypes: [
+        { 
+          name: 'Text', 
+          description: 'NLP processing', 
+          examples: ['Documents', 'Emails', 'Chats'],
+          details: {
+            title: 'Natural Language Processing',
+            description: 'Advanced text analysis and semantic understanding',
+            process: [
+              'Text tokenization and preprocessing',
+              'Semantic embedding generation using transformer models',
+              'Context-aware vector representation',
+              'Similarity indexing and retrieval optimization'
+            ],
+            technologies: ['BERT', 'GPT', 'Sentence Transformers', 'Hugging Face', 'spaCy'],
+            benefits: ['Semantic understanding', 'Context awareness', 'Language agnostic', 'High accuracy']
+          }
+        },
+        { 
+          name: 'Images', 
+          description: 'Computer vision', 
+          examples: ['Photos', 'Screenshots', 'Diagrams'],
+          details: {
+            title: 'Computer Vision Processing',
+            description: 'Visual content analysis and feature extraction',
+            process: [
+              'Image preprocessing and normalization',
+              'Feature extraction using CNN models',
+              'Visual embedding generation',
+              'Multi-modal similarity matching'
+            ],
+            technologies: ['ResNet', 'EfficientNet', 'CLIP', 'OpenCV', 'PIL'],
+            benefits: ['Visual understanding', 'Object detection', 'Image similarity', 'Multi-modal search']
+          }
+        },
+        { 
+          name: 'Audio', 
+          description: 'Speech recognition', 
+          examples: ['Calls', 'Meetings', 'Voice notes'],
+          details: {
+            title: 'Audio Processing & Speech Recognition',
+            description: 'Speech-to-text and audio content analysis',
+            process: [
+              'Audio preprocessing and noise reduction',
+              'Speech recognition and transcription',
+              'Audio feature extraction and embedding',
+              'Speaker identification and diarization'
+            ],
+            technologies: ['Whisper', 'Wav2Vec', 'Librosa', 'SpeechRecognition', 'PyAudio'],
+            benefits: ['Speech recognition', 'Audio search', 'Speaker identification', 'Real-time processing']
+          }
+        },
+        { 
+          name: 'Structured', 
+          description: 'Tabular data', 
+          examples: ['Tables', 'Spreadsheets', 'Records'],
+          details: {
+            title: 'Structured Data Processing',
+            description: 'Tabular data analysis and feature engineering',
+            process: [
+              'Schema validation and data type inference',
+              'Feature engineering and transformation',
+              'Statistical analysis and pattern detection',
+              'Structured embedding generation'
+            ],
+            technologies: ['Pandas', 'NumPy', 'Scikit-learn', 'Feature Engineering', 'Data Validation'],
+            benefits: ['Data quality', 'Feature engineering', 'Pattern detection', 'Statistical analysis']
+          }
+        },
+        { 
+          name: 'Time-series', 
+          description: 'Temporal patterns', 
+          examples: ['Metrics', 'Logs', 'Events'],
+          details: {
+            title: 'Time Series Analysis',
+            description: 'Temporal data processing and pattern recognition',
+            process: [
+              'Time series preprocessing and normalization',
+              'Temporal pattern extraction and analysis',
+              'Anomaly detection and forecasting',
+              'Time-aware embedding generation'
+            ],
+            technologies: ['Prophet', 'ARIMA', 'LSTM', 'InfluxDB', 'Time Series ML'],
+            benefits: ['Temporal patterns', 'Anomaly detection', 'Forecasting', 'Real-time analysis']
+          }
+        },
+        { 
+          name: 'Multimodal', 
+          description: 'Combined formats', 
+          examples: ['Videos', 'Presentations', 'Web pages'],
+          details: {
+            title: 'Multimodal Data Fusion',
+            description: 'Integration of multiple data types and formats',
+            process: [
+              'Multi-modal data alignment and synchronization',
+              'Cross-modal feature extraction and fusion',
+              'Unified embedding space creation',
+              'Multi-modal similarity and retrieval'
+            ],
+            technologies: ['CLIP', 'DALL-E', 'Multimodal Transformers', 'Fusion Networks', 'Cross-modal Learning'],
+            benefits: ['Multi-modal understanding', 'Cross-modal search', 'Unified representation', 'Rich context']
+          }
+        }
+      ],
+      visual: 'neural-network',
+      processSteps: [
+        'Text tokenization and preprocessing',
+        'Feature extraction using transformer models',
+        'Vector embedding generation (768 dimensions)',
+        'Semantic similarity indexing in Pinecone'
+      ]
+    },
+    {
+      id: 'adaptive-layer',
+      title: 'Adaptive Layer',
+      subtitle: 'Hybrid RAG + LoRA + DPO',
+      icon: <Brain className="h-12 w-12" />,
+      color: 'from-purple-500 to-pink-500',
+      description: 'Intelligent processing with continuous learning capabilities',
+      dataTypes: [
+        { 
+          name: 'RAG', 
+          description: 'Retrieval Augmented Generation', 
+          examples: ['Context retrieval', 'Knowledge base', 'Semantic search'],
+          details: {
+            title: 'Retrieval Augmented Generation',
+            description: 'Enhanced AI responses using retrieved context and knowledge',
+            process: [
+              'Query understanding and intent analysis',
+              'Semantic search in vector database',
+              'Context ranking and relevance scoring',
+              'Response generation with retrieved context'
+            ],
+            technologies: ['LangChain', 'LlamaIndex', 'Pinecone', 'Vector Search', 'Context Ranking'],
+            benefits: ['Accurate responses', 'Domain knowledge', 'Reduced hallucinations', 'Context awareness']
+          }
+        },
+        { 
+          name: 'LoRA', 
+          description: 'Low-Rank Adaptation', 
+          examples: ['Model fine-tuning', 'Domain adaptation', 'Efficient training'],
+          details: {
+            title: 'Low-Rank Adaptation',
+            description: 'Efficient model fine-tuning with minimal parameters',
+            process: [
+              'Low-rank matrix decomposition',
+              'Domain-specific weight adaptation',
+              'Parameter-efficient training',
+              'Model performance optimization'
+            ],
+            technologies: ['PEFT', 'LoRA', 'AdaLoRA', 'QLoRA', 'Parameter Efficiency'],
+            benefits: ['Efficient training', 'Domain adaptation', 'Reduced resources', 'Fast deployment']
+          }
+        },
+        { 
+          name: 'DPO', 
+          description: 'Direct Preference Optimization', 
+          examples: ['Feedback learning', 'Preference modeling', 'Quality improvement'],
+          details: {
+            title: 'Direct Preference Optimization',
+            description: 'Model optimization based on human preferences and feedback',
+            process: [
+              'Preference data collection and annotation',
+              'Reward model training and validation',
+              'Direct preference optimization',
+              'Model alignment and quality improvement'
+            ],
+            technologies: ['TRL', 'DPO', 'RLHF', 'Preference Learning', 'Model Alignment'],
+            benefits: ['Better alignment', 'Quality improvement', 'Human preferences', 'Reduced bias']
+          }
+        },
+        { 
+          name: 'Feedback', 
+          description: 'Continuous improvement', 
+          examples: ['User ratings', 'Corrections', 'Performance metrics'],
+          details: {
+            title: 'Continuous Feedback Loop',
+            description: 'Ongoing model improvement through user feedback and metrics',
+            process: [
+              'User interaction tracking and logging',
+              'Feedback collection and analysis',
+              'Performance metrics calculation',
+              'Model updates and retraining'
+            ],
+            technologies: ['Feedback Systems', 'A/B Testing', 'Metrics Tracking', 'Model Monitoring', 'Continuous Learning'],
+            benefits: ['Continuous improvement', 'User satisfaction', 'Performance tracking', 'Adaptive learning']
+          }
+        },
+        { 
+          name: 'Learning', 
+          description: 'Adaptive algorithms', 
+          examples: ['Pattern recognition', 'Behavior analysis', 'Prediction models'],
+          details: {
+            title: 'Adaptive Learning Algorithms',
+            description: 'Self-improving algorithms that learn from data patterns',
+            process: [
+              'Pattern recognition and analysis',
+              'Behavior modeling and prediction',
+              'Algorithm parameter optimization',
+              'Adaptive model updates'
+            ],
+            technologies: ['Machine Learning', 'Pattern Recognition', 'Behavioral Analytics', 'Predictive Modeling', 'Adaptive Systems'],
+            benefits: ['Pattern recognition', 'Predictive accuracy', 'Adaptive behavior', 'Self-improvement']
+          }
+        },
+        { 
+          name: 'Reasoning', 
+          description: 'Explainable AI', 
+          examples: ['Decision trees', 'Logic chains', 'Causal analysis'],
+          details: {
+            title: 'Explainable AI Reasoning',
+            description: 'Transparent AI decision-making with clear reasoning chains',
+            process: [
+              'Decision tree construction and analysis',
+              'Logic chain generation and validation',
+              'Causal relationship identification',
+              'Explanation generation and presentation'
+            ],
+            technologies: ['Explainable AI', 'Decision Trees', 'Logic Programming', 'Causal Inference', 'Interpretability'],
+            benefits: ['Transparency', 'Trust building', 'Debugging capability', 'Regulatory compliance']
+          }
+        }
+      ],
+      visual: 'adaptive-processing',
+      processSteps: [
+        'Hybrid RAG retrieves relevant context',
+        'LoRA adapts model to domain-specific patterns',
+        'DPO optimizes responses based on feedback',
+        'Continuous learning updates model weights'
+      ]
+    },
+    {
+      id: 'strategic-intelligence',
+      title: 'Strategic Intelligence',
+      subtitle: 'Conversational insights',
+      icon: <MessageSquare className="h-12 w-12" />,
+      color: 'from-pink-500 to-red-500',
+      description: 'Transforming processed data into actionable strategic insights',
+      dataTypes: [
+        { 
+          name: 'Questions', 
+          description: 'Natural language queries', 
+          examples: ['What drove churn?', 'Market trends?', 'Risk factors?'],
+          details: {
+            title: 'Natural Language Query Processing',
+            description: 'Understanding and processing complex business questions',
+            process: [
+              'Query parsing and intent recognition',
+              'Context extraction and analysis',
+              'Multi-step reasoning and planning',
+              'Response generation and validation'
+            ],
+            technologies: ['NLP', 'Intent Recognition', 'Query Understanding', 'Reasoning Engines', 'Natural Language Processing'],
+            benefits: ['Natural interaction', 'Complex queries', 'Intent understanding', 'User-friendly interface']
+          }
+        },
+        { 
+          name: 'Insights', 
+          description: 'Data-driven discoveries', 
+          examples: ['Patterns', 'Anomalies', 'Correlations'],
+          details: {
+            title: 'Data-Driven Insight Generation',
+            description: 'Automatic discovery of patterns and anomalies in data',
+            process: [
+              'Data pattern analysis and detection',
+              'Anomaly identification and classification',
+              'Correlation analysis and validation',
+              'Insight ranking and presentation'
+            ],
+            technologies: ['Pattern Recognition', 'Anomaly Detection', 'Statistical Analysis', 'Data Mining', 'Correlation Analysis'],
+            benefits: ['Automatic discovery', 'Pattern recognition', 'Anomaly detection', 'Data-driven insights']
+          }
+        },
+        { 
+          name: 'Recommendations', 
+          description: 'Actionable suggestions', 
+          examples: ['Next steps', 'Optimizations', 'Strategies'],
+          details: {
+            title: 'Strategic Recommendation Engine',
+            description: 'AI-powered strategic recommendations and action plans',
+            process: [
+              'Strategic analysis and planning',
+              'Recommendation generation and ranking',
+              'Impact assessment and validation',
+              'Action plan creation and presentation'
+            ],
+            technologies: ['Strategic Planning', 'Recommendation Systems', 'Impact Analysis', 'Decision Support', 'Action Planning'],
+            benefits: ['Strategic guidance', 'Actionable insights', 'Impact assessment', 'Decision support']
+          }
+        },
+        { 
+          name: 'Predictions', 
+          description: 'Future forecasting', 
+          examples: ['Trends', 'Outcomes', 'Scenarios'],
+          details: {
+            title: 'Predictive Analytics & Forecasting',
+            description: 'Advanced forecasting and scenario modeling',
+            process: [
+              'Historical data analysis and modeling',
+              'Trend identification and extrapolation',
+              'Scenario modeling and simulation',
+              'Prediction confidence and validation'
+            ],
+            technologies: ['Predictive Modeling', 'Time Series Analysis', 'Scenario Planning', 'Forecasting', 'Simulation'],
+            benefits: ['Future planning', 'Risk mitigation', 'Trend prediction', 'Scenario analysis']
+          }
+        },
+        { 
+          name: 'Analytics', 
+          description: 'Business intelligence', 
+          examples: ['KPIs', 'Dashboards', 'Reports'],
+          details: {
+            title: 'Business Intelligence & Analytics',
+            description: 'Comprehensive business analytics and reporting',
+            process: [
+              'KPI calculation and monitoring',
+              'Dashboard creation and customization',
+              'Report generation and distribution',
+              'Analytics visualization and presentation'
+            ],
+            technologies: ['Business Intelligence', 'KPI Tracking', 'Dashboard Tools', 'Reporting Systems', 'Data Visualization'],
+            benefits: ['Business insights', 'Performance tracking', 'Visual analytics', 'Automated reporting']
+          }
+        },
+        { 
+          name: 'Automation', 
+          description: 'Intelligent workflows', 
+          examples: ['Alerts', 'Triggers', 'Actions'],
+          details: {
+            title: 'Intelligent Workflow Automation',
+            description: 'AI-powered automation and intelligent workflows',
+            process: [
+              'Workflow design and optimization',
+              'Trigger detection and activation',
+              'Action execution and monitoring',
+              'Performance tracking and improvement'
+            ],
+            technologies: ['Workflow Automation', 'Event Processing', 'Action Triggers', 'Process Automation', 'Intelligent Systems'],
+            benefits: ['Process automation', 'Efficiency gains', 'Intelligent triggers', 'Workflow optimization']
+          }
+        }
+      ],
+      visual: 'intelligence-output',
+      processSteps: [
+        'Natural language understanding of queries',
+        'Context-aware response generation',
+        'Strategic reasoning and analysis',
+        'Confidence scoring and impact assessment'
+      ]
+    }
+  ];
+
+  const startAnimation = () => {
+    setIsFullscreen(true);
+    setIsAnimating(true);
+    setCurrentPhase(0);
+    setIsAnimationPaused(false);
+    
+    const interval = setInterval(() => {
+      setCurrentPhase((prev) => {
+        if (prev >= phases.length - 1) {
+          clearInterval(interval);
+          setIsAnimating(false);
+          setAnimationInterval(null);
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 6000); // Aumentado de 3s para 6s para melhor compreensão
+    
+    setAnimationInterval(interval);
+  };
+
+  const closeAnimation = () => {
+    setIsFullscreen(false);
+    setIsAnimating(false);
+    setCurrentPhase(0);
+    setIsAnimationPaused(false);
+    
+    if (animationInterval) {
+      clearInterval(animationInterval);
+      setAnimationInterval(null);
+    }
+  };
+
+  const openModal = (dataType: any) => {
+    setSelectedDataType(dataType);
+    setIsModalOpen(true);
+    
+    // Pausar a animação
+    if (animationInterval && isAnimating && !isAnimationPaused) {
+      clearInterval(animationInterval);
+      setAnimationInterval(null);
+      setIsAnimationPaused(true);
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedDataType(null);
+    
+    // Retomar a animação se estava pausada
+    if (isAnimationPaused && isAnimating && !animationInterval) {
+      const interval = setInterval(() => {
+        setCurrentPhase((prev) => {
+          if (prev >= phases.length - 1) {
+            clearInterval(interval);
+            setIsAnimating(false);
+            setAnimationInterval(null);
+            setIsAnimationPaused(false);
+            return prev;
+          }
+          return prev + 1;
+        });
+      }, 6000);
+      
+      setAnimationInterval(interval);
+      setIsAnimationPaused(false);
+    }
+  };
+
+  // Cleanup effect para limpar interval quando componente for desmontado
+  useEffect(() => {
+    return () => {
+      if (animationInterval) {
+        clearInterval(animationInterval);
+      }
+    };
+  }, [animationInterval]);
+
+  if (!isFullscreen) {
+    return (
+      <section className="max-w-6xl mx-auto px-6 md:px-8 py-20 md:py-32">
+        <div className="text-center mb-16">
+          <p className="text-pulse-cyan/80 text-sm tracking-widest uppercase mb-3">Web Summit Demo</p>
+          <h2 className="text-3xl md:text-5xl font-semibold mb-6">
+            Experience the <span className="grad">Complete Journey</span>
+          </h2>
+          <p className="text-slate-300 text-lg max-w-3xl mx-auto mb-8">
+            Experience the complete data journey: from multi-source ingestion through semantic transformation to strategic intelligence. 
+            See how diverse data types become actionable insights with detailed process visualization.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <button
+              onClick={() => {
+                setAnimationDirection('horizontal');
+                startAnimation();
+              }}
+              className="inline-flex items-center gap-2 rounded-xl px-8 py-4 bg-gradient-to-r from-pulse-cyan to-pulse-purple text-black font-semibold hover:shadow-lg hover:shadow-pulse-cyan/25 transition-all duration-300"
+            >
+              <Play className="h-5 w-5" />
+              Horizontal Demo
+            </button>
+            <button
+              onClick={() => {
+                setAnimationDirection('vertical');
+                startAnimation();
+              }}
+              className="inline-flex items-center gap-2 rounded-xl px-8 py-4 border border-white/15 hover:bg-white/5 hover:border-white/25 transition-all duration-300"
+            >
+              <Play className="h-5 w-5" />
+              Vertical Demo
+            </button>
+          </div>
+          
+          <p className="text-slate-400 text-sm">
+            Detailed process visualization • Educational experience • Perfect for WebSummit presentations
+          </p>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm">
+      {/* Close Button */}
+      <button
+        onClick={closeAnimation}
+        className="absolute top-6 right-6 z-60 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300"
+      >
+        <X className="h-6 w-6 text-white" />
+      </button>
+
+      {/* Animation Direction Toggle */}
+      <div className="absolute top-6 left-6 z-60">
+        <div className="flex bg-white/10 rounded-lg p-1">
+          <button
+            onClick={() => setAnimationDirection('horizontal')}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
+              animationDirection === 'horizontal' 
+                ? 'bg-pulse-cyan text-black' 
+                : 'text-white hover:bg-white/10'
+            }`}
+          >
+            Horizontal
+          </button>
+          <button
+            onClick={() => setAnimationDirection('vertical')}
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
+              animationDirection === 'vertical' 
+                ? 'bg-pulse-cyan text-black' 
+                : 'text-white hover:bg-white/10'
+            }`}
+          >
+            Vertical
+          </button>
+        </div>
+      </div>
+
+      {/* Main Animation Container */}
+      <div className={`h-full flex items-center justify-center ${
+        animationDirection === 'horizontal' ? 'flex-row' : 'flex-col'
+      }`}>
+        
+        {/* Phase Indicators */}
+        <div className={`absolute ${
+          animationDirection === 'horizontal' 
+            ? 'top-8 left-1/2 transform -translate-x-1/2 flex flex-row gap-4' 
+            : 'left-8 top-1/2 transform -translate-y-1/2 flex flex-col gap-4'
+        }`}>
+          {phases.map((phase, index) => (
+            <div
+              key={phase.id}
+              className={`w-4 h-4 rounded-full transition-all duration-500 ${
+                currentPhase >= index 
+                  ? 'bg-pulse-cyan scale-125' 
+                  : 'bg-white/30'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Current Phase Display */}
+        <div className="text-center max-w-4xl mx-auto px-8">
+          <div className="mb-8">
+            <div className={`inline-flex items-center justify-center w-24 h-24 bg-gradient-to-r ${phases[currentPhase].color} rounded-full mb-6 animate-pulse`}>
+              {phases[currentPhase].icon}
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">
+              {phases[currentPhase].title}
+            </h1>
+            <p className="text-xl text-pulse-cyan mb-2">
+              {phases[currentPhase].subtitle}
+            </p>
+            <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+              {phases[currentPhase].description}
+            </p>
+          </div>
+
+          {/* Data Types Visualization */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
+            {phases[currentPhase].dataTypes.map((type, index) => (
+              <button
+                key={type.name}
+                onClick={() => openModal(type)}
+                className="bg-white/5 rounded-lg p-6 text-center hover:bg-white/10 transition-all duration-300 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-pulse-cyan/50"
+                style={{
+                  animationDelay: `${index * 0.2}s`,
+                  animation: isAnimating ? 'fadeInUp 0.8s ease-out forwards' : 'none'
+                }}
+              >
+                <div className="text-lg font-semibold text-white mb-2 group-hover:text-pulse-cyan transition-colors">
+                  {type.name}
+                </div>
+                <div className="text-sm text-slate-300 mb-3">
+                  {type.description}
+                </div>
+                <div className="space-y-1">
+                  {type.examples.map((example, exIndex) => (
+                    <div 
+                      key={exIndex}
+                      className="text-xs text-pulse-cyan/80 bg-pulse-cyan/10 rounded px-2 py-1"
+                      style={{
+                        animationDelay: `${(index * 0.2) + (exIndex * 0.1)}s`,
+                        animation: isAnimating ? 'fadeInUp 0.6s ease-out forwards' : 'none'
+                      }}
+                    >
+                      {example}
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-3 text-xs text-pulse-cyan/60 group-hover:text-pulse-cyan transition-colors">
+                  Click for details →
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {/* Process Steps */}
+          <div className="mb-12">
+            <h3 className="text-xl font-semibold text-white mb-6 text-center">Process Steps</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {phases[currentPhase].processSteps.map((step, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-4 bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-all duration-300"
+                  style={{
+                    animationDelay: `${index * 0.3}s`,
+                    animation: isAnimating ? 'fadeInUp 0.8s ease-out forwards' : 'none'
+                  }}
+                >
+                  <div className="w-8 h-8 bg-gradient-to-r from-pulse-cyan to-pulse-purple rounded-full flex items-center justify-center text-sm font-bold text-black">
+                    {index + 1}
+                  </div>
+                  <div className="text-slate-300">{step}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Progress Bar */}
+          <div className="w-full bg-white/10 rounded-full h-2 mb-8">
+            <div 
+              className="bg-gradient-to-r from-pulse-cyan to-pulse-purple h-2 rounded-full transition-all duration-1000"
+              style={{ width: `${((currentPhase + 1) / phases.length) * 100}%` }}
+            />
+          </div>
+
+          {/* Real-time Statistics */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div className="bg-white/5 rounded-lg p-4 text-center">
+              <div className="text-2xl font-bold text-pulse-cyan mb-1">
+                {phases[currentPhase].id === 'data-ingestion' ? '47K' : 
+                 phases[currentPhase].id === 'vector-embedding' ? '2.3M' :
+                 phases[currentPhase].id === 'adaptive-layer' ? '156K' : '89%'}
+              </div>
+              <div className="text-xs text-slate-400">
+                {phases[currentPhase].id === 'data-ingestion' ? 'Data Sources' : 
+                 phases[currentPhase].id === 'vector-embedding' ? 'Vectors Generated' :
+                 phases[currentPhase].id === 'adaptive-layer' ? 'Model Updates' : 'Accuracy Score'}
+              </div>
+            </div>
+            <div className="bg-white/5 rounded-lg p-4 text-center">
+              <div className="text-2xl font-bold text-pulse-purple mb-1">
+                {phases[currentPhase].id === 'data-ingestion' ? '12TB' : 
+                 phases[currentPhase].id === 'vector-embedding' ? '768D' :
+                 phases[currentPhase].id === 'adaptive-layer' ? '0.1%' : '2.1s'}
+              </div>
+              <div className="text-xs text-slate-400">
+                {phases[currentPhase].id === 'data-ingestion' ? 'Data Volume' : 
+                 phases[currentPhase].id === 'vector-embedding' ? 'Vector Dimensions' :
+                 phases[currentPhase].id === 'adaptive-layer' ? 'LoRA Parameters' : 'Response Time'}
+              </div>
+            </div>
+            <div className="bg-white/5 rounded-lg p-4 text-center">
+              <div className="text-2xl font-bold text-green-400 mb-1">
+                {phases[currentPhase].id === 'data-ingestion' ? '99.9%' : 
+                 phases[currentPhase].id === 'vector-embedding' ? '94%' :
+                 phases[currentPhase].id === 'adaptive-layer' ? '87%' : '€2.1M'}
+              </div>
+              <div className="text-xs text-slate-400">
+                {phases[currentPhase].id === 'data-ingestion' ? 'Uptime' : 
+                 phases[currentPhase].id === 'vector-embedding' ? 'Similarity Score' :
+                 phases[currentPhase].id === 'adaptive-layer' ? 'Confidence' : 'Revenue Impact'}
+              </div>
+            </div>
+            <div className="bg-white/5 rounded-lg p-4 text-center">
+              <div className="text-2xl font-bold text-orange-400 mb-1">
+                {phases[currentPhase].id === 'data-ingestion' ? '24/7' : 
+                 phases[currentPhase].id === 'vector-embedding' ? 'Real-time' :
+                 phases[currentPhase].id === 'adaptive-layer' ? 'Continuous' : 'Strategic'}
+              </div>
+              <div className="text-xs text-slate-400">
+                {phases[currentPhase].id === 'data-ingestion' ? 'Processing' : 
+                 phases[currentPhase].id === 'vector-embedding' ? 'Indexing' :
+                 phases[currentPhase].id === 'adaptive-layer' ? 'Learning' : 'Intelligence'}
+              </div>
+            </div>
+          </div>
+
+          {/* Phase Counter */}
+          <div className="text-slate-400 text-sm">
+            Phase {currentPhase + 1} of {phases.length}
+          </div>
+        </div>
+
+        {/* Background Visual Effects */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Floating Particles */}
+          {Array.from({ length: 50 }).map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-2 h-2 bg-pulse-cyan/30 rounded-full animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 4}s`,
+                animationDuration: `${2 + Math.random() * 3}s`
+              }}
+            />
+          ))}
+
+          {/* Neural Network Lines */}
+          {phases[currentPhase].visual === 'neural-network' && (
+            <div className="absolute inset-0">
+              {Array.from({ length: 20 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-px h-20 bg-gradient-to-b from-pulse-cyan/50 to-transparent"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    transform: `rotate(${Math.random() * 360}deg)`,
+                    animation: 'neuralPulse 2s ease-in-out infinite',
+                    animationDelay: `${Math.random() * 2}s`
+                  }}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Data Flow Lines */}
+          {phases[currentPhase].visual === 'data-flow' && (
+            <div className="absolute inset-0">
+              {Array.from({ length: 15 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-1 h-32 bg-gradient-to-r from-transparent via-pulse-cyan to-transparent"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    animation: 'dataFlow 3s linear infinite',
+                    animationDelay: `${Math.random() * 3}s`
+                  }}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Adaptive Processing Circles */}
+          {phases[currentPhase].visual === 'adaptive-processing' && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="relative">
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute w-4 h-4 bg-pulse-purple rounded-full"
+                    style={{
+                      transform: `rotate(${i * 45}deg) translateX(100px)`,
+                      animation: 'adaptiveRotate 4s linear infinite',
+                      animationDelay: `${i * 0.5}s`
+                    }}
+                  />
+                ))}
+                <div className="w-8 h-8 bg-pulse-cyan rounded-full animate-pulse" />
+              </div>
+            </div>
+          )}
+
+          {/* Intelligence Output Waves */}
+          {phases[currentPhase].visual === 'intelligence-output' && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-64 h-64 border border-pulse-cyan/30 rounded-full"
+                  style={{
+                    animation: 'intelligenceWave 3s ease-out infinite',
+                    animationDelay: `${i * 0.6}s`
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Completion Message */}
+        {currentPhase === phases.length - 1 && !isAnimating && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+            <div className="text-center max-w-2xl mx-auto px-8">
+              <div className="w-32 h-32 bg-gradient-to-r from-pulse-cyan to-pulse-purple rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
+                <CheckCircle className="h-16 w-16 text-black" />
+              </div>
+              <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+                Journey Complete!
+              </h2>
+              <p className="text-xl text-slate-300 mb-8">
+                Complete data transformation: Multi-source ingestion → Vector embedding → Adaptive processing → Strategic intelligence
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                  onClick={startAnimation}
+                  className="inline-flex items-center gap-2 rounded-xl px-8 py-4 bg-gradient-to-r from-pulse-cyan to-pulse-purple text-black font-semibold hover:shadow-lg hover:shadow-pulse-cyan/25 transition-all duration-300"
+                >
+                  <Play className="h-5 w-5" />
+                  Replay Demo
+                </button>
+                <button
+                  onClick={closeAnimation}
+                  className="inline-flex items-center gap-2 rounded-xl px-8 py-4 border border-white/15 hover:bg-white/5 hover:border-white/25 transition-all duration-300"
+                >
+                  <X className="h-5 w-5" />
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Modal de Detalhes */}
+      {isModalOpen && selectedDataType && (
+        <div className="fixed inset-0 z-60 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+          <div className="bg-slate-900/95 backdrop-blur-sm rounded-2xl p-8 max-w-4xl max-h-[90vh] overflow-y-auto border border-white/10 shadow-2xl">
+            {/* Header do Modal */}
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <h2 className="text-2xl font-bold text-white">
+                    {selectedDataType.details.title}
+                  </h2>
+                  {isAnimationPaused && (
+                    <div className="flex items-center gap-2 px-3 py-1 bg-orange-400/10 text-orange-400 rounded-full text-sm border border-orange-400/20">
+                      <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
+                      Animation Paused
+                    </div>
+                  )}
+                </div>
+                <p className="text-slate-300">
+                  {selectedDataType.details.description}
+                </p>
+              </div>
+              <button
+                onClick={closeModal}
+                className="p-2 bg-white/10 hover:bg-white/20 rounded-full transition-all duration-300"
+              >
+                <X className="h-6 w-6 text-white" />
+              </button>
+            </div>
+
+            {/* Process Steps */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <Workflow className="h-5 w-5 text-pulse-cyan" />
+                Process Steps
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {selectedDataType.details.process.map((step: string, index: number) => (
+                  <div
+                    key={index}
+                    className="flex items-start gap-3 bg-white/5 rounded-lg p-4"
+                  >
+                    <div className="w-6 h-6 bg-gradient-to-r from-pulse-cyan to-pulse-purple rounded-full flex items-center justify-center text-xs font-bold text-black flex-shrink-0 mt-0.5">
+                      {index + 1}
+                    </div>
+                    <div className="text-slate-300 text-sm">{step}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Technologies */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <Cpu className="h-5 w-5 text-pulse-purple" />
+                Technologies Used
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {selectedDataType.details.technologies.map((tech: string, index: number) => (
+                  <span
+                    key={index}
+                    className="px-3 py-1 bg-pulse-purple/10 text-pulse-purple rounded-full text-sm border border-pulse-purple/20"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Benefits */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <CheckCircle className="h-5 w-5 text-green-400" />
+                Key Benefits
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {selectedDataType.details.benefits.map((benefit: string, index: number) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-3 bg-green-400/10 rounded-lg p-3 border border-green-400/20"
+                  >
+                    <CheckCircle className="h-4 w-4 text-green-400 flex-shrink-0" />
+                    <div className="text-slate-300 text-sm">{benefit}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Examples */}
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <Lightbulb className="h-5 w-5 text-orange-400" />
+                Real-world Examples
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {selectedDataType.examples.map((example: string, index: number) => (
+                  <span
+                    key={index}
+                    className="px-3 py-1 bg-orange-400/10 text-orange-400 rounded-full text-sm border border-orange-400/20"
+                  >
+                    {example}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Close Button */}
+            <div className="flex justify-end">
+              <button
+                onClick={closeModal}
+                className="px-6 py-3 bg-gradient-to-r from-pulse-cyan to-pulse-purple text-black font-semibold rounded-lg hover:shadow-lg hover:shadow-pulse-cyan/25 transition-all duration-300"
+              >
+                Close Details
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default function Page() {
   const [scrollY, setScrollY] = useState(0);
 
@@ -869,6 +1929,9 @@ export default function Page() {
 
       {/* STRATEGIC INTELLIGENCE EXPERIENCE */}
       <StrategicIntelligenceExperience />
+
+      {/* WEB SUMMIT DEMO ANIMATION */}
+      <WebSummitDemoAnimation />
 
       {/* COMPARISON */}
       <section id="comparison" className="max-w-6xl mx-auto px-6 md:px-8 py-20 md:py-32">
