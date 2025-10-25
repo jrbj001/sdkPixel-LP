@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Brain, Layers, MessageSquare, Network, Sparkles, Workflow, LineChart, Shield, Database, Cpu, Zap, Target } from "lucide-react";
+import { ArrowRight, Brain, Layers, MessageSquare, Network, Sparkles, Workflow, LineChart, Shield, Database, Cpu, Zap, Target, Bot, TrendingUp, BarChart3, Users, DollarSign, AlertTriangle, CheckCircle, Lightbulb } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const Section = ({ id, title, kicker, children }:{
@@ -196,6 +196,315 @@ const SDKProcessAnimation = () => {
   );
 };
 
+const StrategicIntelligenceExperience = () => {
+  const [activeConversation, setActiveConversation] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    const element = document.getElementById('strategic-intelligence');
+    if (element) {
+      observer.observe(element);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const conversations = [
+    {
+      user: "What's driving our customer churn this quarter?",
+      ai: {
+        reasoning: "Analyzing customer behavior patterns, payment history, and engagement metrics across 47,000 active users...",
+        insight: "Primary churn drivers: 1) Payment failures increased 23% after pricing change, 2) Feature usage dropped 31% for users on legacy plans, 3) Support ticket volume spiked 45% in last 30 days",
+        recommendation: "Immediate action: Implement payment retry logic, offer migration incentives for legacy users, and deploy proactive support for high-risk segments",
+        confidence: 94,
+        impact: "High - Could reduce churn by 15-20%"
+      }
+    },
+    {
+      user: "Should we expand to the European market next quarter?",
+      ai: {
+        reasoning: "Evaluating market readiness, regulatory compliance, competitive landscape, and resource allocation...",
+        insight: "Market analysis shows: 1) GDPR compliance costs estimated at €180K, 2) Local competitors have 40% market share, 3) Customer acquisition cost 2.3x higher than US, 4) Revenue potential €2.1M annually",
+        recommendation: "Defer expansion by 6 months. Focus on optimizing current markets first. Consider partnership model instead of direct entry.",
+        confidence: 87,
+        impact: "Strategic - Avoids €500K+ potential losses"
+      }
+    },
+    {
+      user: "Our conversion rate dropped 12% this month. What's happening?",
+      ai: {
+        reasoning: "Cross-referencing funnel analytics, A/B test results, and external factors...",
+        insight: "Root cause identified: 1) Checkout page load time increased 2.3s due to payment processor changes, 2) Mobile conversion specifically down 18%, 3) New competitor launched with 20% lower pricing",
+        recommendation: "Priority fixes: Optimize payment flow, implement mobile-first checkout, and launch competitive pricing strategy within 2 weeks",
+        confidence: 91,
+        impact: "Critical - Revenue impact of €340K monthly"
+      }
+    }
+  ];
+
+  const strategicFeatures = [
+    {
+      icon: <Bot className="h-6 w-6" />,
+      title: "Conversational Reasoning",
+      description: "Ask complex questions in natural language. Get strategic insights with full reasoning chains.",
+      example: "Why did our Q3 revenue miss targets by 8%?"
+    },
+    {
+      icon: <TrendingUp className="h-6 w-6" />,
+      title: "Predictive Intelligence",
+      description: "Anticipate market shifts, customer behavior, and business risks before they impact you.",
+      example: "Customer churn probability: 67% for segment A"
+    },
+    {
+      icon: <Lightbulb className="h-6 w-6" />,
+      title: "Strategic Recommendations",
+      description: "Get actionable insights with confidence scores and impact assessments.",
+      example: "Launch product X in Q2 for €2.1M revenue (89% confidence)"
+    },
+    {
+      icon: <BarChart3 className="h-6 w-6" />,
+      title: "Context-Aware Analytics",
+      description: "Understand not just what happened, but why it happened and what to do about it.",
+      example: "Revenue drop caused by competitor pricing, not product issues"
+    }
+  ];
+
+  return (
+    <section id="strategic-intelligence" className="max-w-6xl mx-auto px-6 md:px-8 py-20 md:py-32">
+      <div className="text-center mb-16">
+        <p className="text-pulse-cyan/80 text-sm tracking-widest uppercase mb-3">Strategic Intelligence</p>
+        <h2 className="text-3xl md:text-5xl font-semibold mb-6">
+          Beyond <span className="grad">Dashboards</span> — Strategic Reasoning
+        </h2>
+        <p className="text-slate-300 text-lg max-w-3xl mx-auto">
+          Experience AI that thinks strategically, not just visualizes data. Get insights that drive decisions, not just reports.
+        </p>
+      </div>
+
+      {/* Interactive Conversation Demo */}
+      <div className="mb-16">
+        <div className="demo-container max-w-4xl mx-auto">
+          {/* Floating Elements */}
+          <div className="floating-elements">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div
+                key={i}
+                className="floating-element-small"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 4}s`,
+                  animationDuration: `${4 + Math.random() * 2}s`
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Demo Header */}
+          <div className="demo-header p-6">
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <div className="w-10 h-10 bg-gradient-to-r from-pulse-cyan to-pulse-purple rounded-full flex items-center justify-center">
+                  <Bot className="h-5 w-5 text-white" />
+                </div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full animate-pulse"></div>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold">Live Strategic Intelligence</h3>
+                <div className="flex items-center gap-2 text-sm text-slate-400">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <span>AI Reasoning Active</span>
+                  <div className="typing-indicator ml-2">
+                    <div className="typing-dot"></div>
+                    <div className="typing-dot"></div>
+                    <div className="typing-dot"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Scenario Selector */}
+          <div className="p-6 border-b border-white/10">
+            <div className="flex gap-3">
+              {conversations.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveConversation(index)}
+                  className={`scenario-button px-6 py-3 rounded-xl text-sm font-medium transition-all ${
+                    activeConversation === index
+                      ? 'active text-white'
+                      : 'bg-white/5 hover:bg-white/10 text-slate-300'
+                  }`}
+                >
+                  Scenario {index + 1}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Conversation Display */}
+          <div className="p-6 space-y-6">
+            {/* User Message */}
+            <div className="message-bubble flex items-start gap-4">
+              <div className="w-10 h-10 bg-gradient-to-r from-slate-600 to-slate-700 rounded-full flex items-center justify-center text-sm font-bold text-white">
+                U
+              </div>
+              <div className="bg-white/5 rounded-2xl p-4 flex-1 border border-white/10">
+                <p className="text-slate-200">{conversations[activeConversation].user}</p>
+              </div>
+            </div>
+
+            {/* AI Response */}
+            <div className="message-bubble flex items-start gap-4">
+              <div className="w-10 h-10 bg-gradient-to-r from-pulse-purple to-pulse-cyan rounded-full flex items-center justify-center">
+                <Bot className="h-5 w-5 text-white" />
+              </div>
+              <div className="ai-response rounded-2xl p-6 flex-1">
+                <div className="space-y-4">
+                  <div className="reasoning-step">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-2 h-2 bg-pulse-cyan rounded-full animate-pulse"></div>
+                      <span className="text-pulse-cyan text-sm font-medium">Reasoning Process</span>
+                    </div>
+                    <p className="text-slate-300 text-sm leading-relaxed">{conversations[activeConversation].ai.reasoning}</p>
+                  </div>
+                  
+                  <div className="reasoning-step">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-2 h-2 bg-pulse-purple rounded-full animate-pulse"></div>
+                      <span className="text-pulse-purple text-sm font-medium">Strategic Insight</span>
+                    </div>
+                    <p className="text-slate-200 leading-relaxed">{conversations[activeConversation].ai.insight}</p>
+                  </div>
+                  
+                  <div className="reasoning-step">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <span className="text-green-400 text-sm font-medium">Recommendation</span>
+                    </div>
+                    <p className="text-slate-200 leading-relaxed">{conversations[activeConversation].ai.recommendation}</p>
+                  </div>
+                  
+                  <div className="reasoning-step flex gap-6 pt-4 border-t border-white/10">
+                    <div className="flex items-center gap-3">
+                      <CheckCircle className="h-4 w-4 text-green-400" />
+                      <div>
+                        <div className="text-xs text-slate-400 mb-1">Confidence</div>
+                        <div className="confidence-bar w-20">
+                          <div 
+                            className="confidence-fill" 
+                            style={{'--confidence-width': `${conversations[activeConversation].ai.confidence}%`} as React.CSSProperties}
+                          ></div>
+                        </div>
+                        <div className="text-xs text-slate-300 mt-1">{conversations[activeConversation].ai.confidence}%</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <TrendingUp className="h-4 w-4 text-pulse-cyan" />
+                      <div>
+                        <div className="text-xs text-slate-400 mb-1">Impact</div>
+                        <div className="impact-badge px-3 py-1 bg-pulse-cyan/10 rounded-full">
+                          <span className="text-xs text-pulse-cyan font-medium">
+                            {conversations[activeConversation].ai.impact}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Strategic Features Grid */}
+      <div className="grid md:grid-cols-2 gap-8 mb-16">
+        {strategicFeatures.map((feature, index) => (
+          <div key={index} className="card p-6 hover:scale-105 transition-all duration-300 group">
+            <div className="flex items-start gap-4">
+              <div className="p-3 bg-pulse-cyan/10 rounded-xl group-hover:bg-pulse-cyan/20 transition-colors">
+                {feature.icon}
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-slate-300 mb-3">{feature.description}</p>
+                <div className="bg-white/5 rounded-lg p-3">
+                  <p className="text-pulse-cyan text-sm font-mono">"{feature.example}"</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Comparison with Traditional Tools */}
+      <div className="card p-8">
+        <h3 className="text-2xl font-semibold mb-6 text-center">Strategic Intelligence vs Traditional BI</h3>
+        <div className="grid md:grid-cols-2 gap-8">
+          <div>
+            <h4 className="text-lg font-medium text-slate-400 mb-4 flex items-center gap-2">
+              <BarChart3 className="h-5 w-5" />
+              Traditional BI Tools
+            </h4>
+            <ul className="space-y-2 text-slate-300">
+              <li className="flex items-center gap-2">
+                <AlertTriangle className="h-4 w-4 text-red-400" />
+                Show what happened (reactive)
+              </li>
+              <li className="flex items-center gap-2">
+                <AlertTriangle className="h-4 w-4 text-red-400" />
+                Require manual analysis
+              </li>
+              <li className="flex items-center gap-2">
+                <AlertTriangle className="h-4 w-4 text-red-400" />
+                Static dashboards
+              </li>
+              <li className="flex items-center gap-2">
+                <AlertTriangle className="h-4 w-4 text-red-400" />
+                No strategic context
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-lg font-medium text-pulse-cyan mb-4 flex items-center gap-2">
+              <Brain className="h-5 w-5" />
+              PixelPulse Strategic Intelligence
+            </h4>
+            <ul className="space-y-2 text-slate-300">
+              <li className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-green-400" />
+                Predict what will happen (proactive)
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-green-400" />
+                Automated strategic reasoning
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-green-400" />
+                Conversational interface
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-green-400" />
+                Actionable recommendations
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export default function Page() {
   const [scrollY, setScrollY] = useState(0);
 
@@ -340,6 +649,175 @@ export default function Page() {
       {/* SDK PROCESS ANIMATION */}
       <SDKProcessAnimation />
 
+      {/* TECHNOLOGY PARTNERS */}
+      <section className="py-16 bg-gradient-to-r from-slate-900/50 to-slate-800/50 border-y border-white/10">
+        <div className="max-w-6xl mx-auto px-6 md:px-8">
+          <div className="text-center mb-12">
+            <p className="text-pulse-cyan/80 text-sm tracking-widest uppercase mb-3">Technology Stack</p>
+            <h2 className="text-2xl md:text-3xl font-semibold mb-4">
+              Powered by <span className="grad">Industry Leaders</span>
+            </h2>
+            <p className="text-slate-400 max-w-2xl mx-auto">
+              Built on proven enterprise-grade technologies and AI infrastructure
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-items-center">
+            {/* Vector Database */}
+            <div className="group flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-white/5 transition-all duration-300">
+              <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <svg viewBox="0 0 24 24" className="w-10 h-10">
+                  <path fill="#4A90E2" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+              </div>
+              <div className="text-center">
+                <h3 className="text-sm font-semibold text-slate-200">Pinecone</h3>
+                <p className="text-xs text-slate-400">Vector Database</p>
+              </div>
+            </div>
+
+            {/* Cloud Platform */}
+            <div className="group flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-white/5 transition-all duration-300">
+              <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <svg viewBox="0 0 24 24" className="w-10 h-10">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                </svg>
+              </div>
+              <div className="text-center">
+                <h3 className="text-sm font-semibold text-slate-200">Google Cloud</h3>
+                <p className="text-xs text-slate-400">GPU Infrastructure</p>
+              </div>
+            </div>
+
+            {/* Database */}
+            <div className="group flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-white/5 transition-all duration-300">
+              <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <svg viewBox="0 0 24 24" className="w-10 h-10">
+                  <path fill="#3ECF8E" d="M21.362 9.354H12V.396a.396.396 0 0 0-.716-.233L2.203 12.424l-.401.562a1.04 1.04 0 0 0 .836 1.659H12v8.959a.396.396 0 0 0 .716.233l9.081-12.261.401-.562a1.04 1.04 0 0 0-.836-1.66z"/>
+                </svg>
+              </div>
+              <div className="text-center">
+                <h3 className="text-sm font-semibold text-slate-200">Supabase</h3>
+                <p className="text-xs text-slate-400">Database & Auth</p>
+              </div>
+            </div>
+
+            {/* AI Models */}
+            <div className="group flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-white/5 transition-all duration-300">
+              <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <svg viewBox="0 0 24 24" className="w-10 h-10">
+                  <path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </div>
+              <div className="text-center">
+                <h3 className="text-sm font-semibold text-slate-200">Meta AI</h3>
+                <p className="text-xs text-slate-400">Llama Models</p>
+              </div>
+            </div>
+
+            {/* Deployment */}
+            <div className="group flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-white/5 transition-all duration-300">
+              <div className="w-16 h-16 bg-black rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <svg viewBox="0 0 24 24" className="w-10 h-10">
+                  <path fill="white" d="M24 22.525H0l12-21.05 12 21.05z"/>
+                </svg>
+              </div>
+              <div className="text-center">
+                <h3 className="text-sm font-semibold text-slate-200">Vercel</h3>
+                <p className="text-xs text-slate-400">Edge Deployment</p>
+              </div>
+            </div>
+
+            {/* ML Platform */}
+            <div className="group flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-white/5 transition-all duration-300">
+              <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <svg viewBox="0 0 24 24" className="w-10 h-10">
+                  <path fill="#FFBE00" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  <circle fill="#FF6B6B" cx="12" cy="7" r="2"/>
+                  <circle fill="#4ECDC4" cx="12" cy="12" r="2"/>
+                  <circle fill="#45B7D1" cx="12" cy="17" r="2"/>
+                </svg>
+              </div>
+              <div className="text-center">
+                <h3 className="text-sm font-semibold text-slate-200">Weights & Biases</h3>
+                <p className="text-xs text-slate-400">ML Observability</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Additional Partners Row */}
+          <div className="mt-12 grid grid-cols-3 md:grid-cols-6 gap-6 items-center justify-items-center opacity-60">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center mb-2 shadow-md">
+                <svg viewBox="0 0 24 24" className="w-6 h-6">
+                  <path fill="white" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  <path fill="white" d="M8 6h8v1H8V6zm0 2h8v1H8V8zm0 2h8v1H8v-1zm0 2h8v1H8v-1z"/>
+                </svg>
+              </div>
+              <p className="text-xs text-slate-400">LangChain</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg flex items-center justify-center mb-2 shadow-md">
+                <svg viewBox="0 0 24 24" className="w-6 h-6">
+                  <path fill="white" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  <circle fill="#FF6B6B" cx="12" cy="7" r="1.5"/>
+                  <circle fill="#4ECDC4" cx="12" cy="12" r="1.5"/>
+                  <circle fill="#45B7D1" cx="12" cy="17" r="1.5"/>
+                  <path fill="white" d="M10 9h4v2h-4V9zm0 4h4v2h-4v-2z"/>
+                </svg>
+              </div>
+              <p className="text-xs text-slate-400">LlamaIndex</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center mb-2 shadow-md">
+                <svg viewBox="0 0 24 24" className="w-6 h-6">
+                  <path fill="white" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                  <circle fill="white" cx="12" cy="12" r="3"/>
+                  <circle fill="#FF6B35" cx="12" cy="12" r="1"/>
+                </svg>
+              </div>
+              <p className="text-xs text-slate-400">Hugging Face</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center mb-2 shadow-md">
+                <svg viewBox="0 0 24 24" className="w-6 h-6">
+                  <path fill="white" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  <path fill="white" d="M6 8h12v1H6V8zm0 2h12v1H6v-1zm0 2h12v1H6v-1zm0 2h12v1H6v-1z"/>
+                  <circle fill="#FF6B6B" cx="12" cy="7" r="0.8"/>
+                  <circle fill="#4ECDC4" cx="12" cy="12" r="0.8"/>
+                  <circle fill="#45B7D1" cx="12" cy="17" r="0.8"/>
+                </svg>
+              </div>
+              <p className="text-xs text-slate-400">MLflow</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-green-600 rounded-lg flex items-center justify-center mb-2 shadow-md">
+                <svg viewBox="0 0 24 24" className="w-6 h-6">
+                  <path fill="white" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  <path fill="white" d="M12 4c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
+                </svg>
+              </div>
+              <p className="text-xs text-slate-400">Evidently</p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-green-600 rounded-lg flex items-center justify-center mb-2 shadow-md">
+                <svg viewBox="0 0 24 24" className="w-6 h-6">
+                  <path fill="white" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  <circle fill="#F59E0B" cx="12" cy="7" r="1"/>
+                  <circle fill="#EF4444" cx="12" cy="12" r="1"/>
+                  <circle fill="#8B5CF6" cx="12" cy="17" r="1"/>
+                  <path fill="white" d="M8 6h8v1H8V6zm0 2h8v1H8V8zm0 2h8v1H8v-1zm0 2h8v1H8v-1zm0 2h8v1H8v-1z"/>
+                </svg>
+              </div>
+              <p className="text-xs text-slate-400">TRL</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* HOW (TECH DNA) */}
       <Section id="blueprint" title="Technical Blueprint" kicker="Serverless by design">
         <div className="grid md:grid-cols-2 gap-6 mt-8">
@@ -389,8 +867,12 @@ export default function Page() {
         </div>
       </Section>
 
+      {/* STRATEGIC INTELLIGENCE EXPERIENCE */}
+      <StrategicIntelligenceExperience />
+
       {/* COMPARISON */}
-      <Section title="Agents vs Adaptive Layer">
+      <section id="comparison" className="max-w-6xl mx-auto px-6 md:px-8 py-20 md:py-32">
+        <h2 className="text-3xl md:text-5xl font-semibold mb-8">Agents vs Adaptive Layer</h2>
         <div className="overflow-x-auto mt-8">
           <div className="card p-8">
             <table className="w-full text-left">
@@ -420,7 +902,7 @@ export default function Page() {
             </table>
           </div>
         </div>
-      </Section>
+      </section>
 
       {/* ROADMAP */}
       <Section id="roadmap" title="Roadmap 2025" kicker="Build path">
