@@ -515,22 +515,48 @@ const WebSummitDemoAnimation = () => {
     {
       id: 'data-ingestion',
       title: 'Data Ingestion',
-      subtitle: 'Multi-source data flows',
+      subtitle: 'Multi-source data collection',
       icon: <Database className="h-12 w-12" />,
       color: 'from-blue-500 to-cyan-500',
-      description: 'Raw data from APIs, databases, files, and real-time streams',
-      dataTypes: ['APIs', 'Databases', 'Files', 'Streams', 'IoT', 'Social'],
-      visual: 'data-flow'
+      description: 'Collecting raw data from multiple sources and formats',
+      dataTypes: [
+        { name: 'APIs', description: 'REST, GraphQL, Webhooks', examples: ['Salesforce', 'HubSpot', 'Stripe'] },
+        { name: 'Databases', description: 'SQL, NoSQL, Data Warehouses', examples: ['PostgreSQL', 'MongoDB', 'Snowflake'] },
+        { name: 'Files', description: 'CSV, JSON, PDF, Excel', examples: ['Reports', 'Exports', 'Documents'] },
+        { name: 'Streams', description: 'Real-time data flows', examples: ['Kafka', 'Kinesis', 'Pub/Sub'] },
+        { name: 'IoT', description: 'Sensor data, devices', examples: ['Temperature', 'GPS', 'Sensors'] },
+        { name: 'Social', description: 'Social media, reviews', examples: ['Twitter', 'Reviews', 'Comments'] }
+      ],
+      visual: 'data-flow',
+      processSteps: [
+        'Data connectors establish secure connections',
+        'Raw data streams in real-time from sources',
+        'Data validation and quality checks',
+        'Initial data normalization begins'
+      ]
     },
     {
       id: 'vector-embedding',
       title: 'Vector Embedding',
-      subtitle: 'Semantic understanding',
+      subtitle: 'Semantic transformation',
       icon: <Network className="h-12 w-12" />,
       color: 'from-cyan-500 to-purple-500',
-      description: 'Transform unstructured data into semantic vectors',
-      dataTypes: ['Text', 'Images', 'Audio', 'Structured', 'Time-series'],
-      visual: 'neural-network'
+      description: 'Converting diverse data types into semantic vector representations',
+      dataTypes: [
+        { name: 'Text', description: 'NLP processing', examples: ['Documents', 'Emails', 'Chats'] },
+        { name: 'Images', description: 'Computer vision', examples: ['Photos', 'Screenshots', 'Diagrams'] },
+        { name: 'Audio', description: 'Speech recognition', examples: ['Calls', 'Meetings', 'Voice notes'] },
+        { name: 'Structured', description: 'Tabular data', examples: ['Tables', 'Spreadsheets', 'Records'] },
+        { name: 'Time-series', description: 'Temporal patterns', examples: ['Metrics', 'Logs', 'Events'] },
+        { name: 'Multimodal', description: 'Combined formats', examples: ['Videos', 'Presentations', 'Web pages'] }
+      ],
+      visual: 'neural-network',
+      processSteps: [
+        'Text tokenization and preprocessing',
+        'Feature extraction using transformer models',
+        'Vector embedding generation (768 dimensions)',
+        'Semantic similarity indexing in Pinecone'
+      ]
     },
     {
       id: 'adaptive-layer',
@@ -538,9 +564,22 @@ const WebSummitDemoAnimation = () => {
       subtitle: 'Hybrid RAG + LoRA + DPO',
       icon: <Brain className="h-12 w-12" />,
       color: 'from-purple-500 to-pink-500',
-      description: 'Continuous learning with explainable reasoning',
-      dataTypes: ['RAG', 'LoRA', 'DPO', 'Feedback', 'Learning'],
-      visual: 'adaptive-processing'
+      description: 'Intelligent processing with continuous learning capabilities',
+      dataTypes: [
+        { name: 'RAG', description: 'Retrieval Augmented Generation', examples: ['Context retrieval', 'Knowledge base', 'Semantic search'] },
+        { name: 'LoRA', description: 'Low-Rank Adaptation', examples: ['Model fine-tuning', 'Domain adaptation', 'Efficient training'] },
+        { name: 'DPO', description: 'Direct Preference Optimization', examples: ['Feedback learning', 'Preference modeling', 'Quality improvement'] },
+        { name: 'Feedback', description: 'Continuous improvement', examples: ['User ratings', 'Corrections', 'Performance metrics'] },
+        { name: 'Learning', description: 'Adaptive algorithms', examples: ['Pattern recognition', 'Behavior analysis', 'Prediction models'] },
+        { name: 'Reasoning', description: 'Explainable AI', examples: ['Decision trees', 'Logic chains', 'Causal analysis'] }
+      ],
+      visual: 'adaptive-processing',
+      processSteps: [
+        'Hybrid RAG retrieves relevant context',
+        'LoRA adapts model to domain-specific patterns',
+        'DPO optimizes responses based on feedback',
+        'Continuous learning updates model weights'
+      ]
     },
     {
       id: 'strategic-intelligence',
@@ -548,9 +587,22 @@ const WebSummitDemoAnimation = () => {
       subtitle: 'Conversational insights',
       icon: <MessageSquare className="h-12 w-12" />,
       color: 'from-pink-500 to-red-500',
-      description: 'Natural language questions and strategic recommendations',
-      dataTypes: ['Questions', 'Insights', 'Recommendations', 'Predictions'],
-      visual: 'intelligence-output'
+      description: 'Transforming processed data into actionable strategic insights',
+      dataTypes: [
+        { name: 'Questions', description: 'Natural language queries', examples: ['What drove churn?', 'Market trends?', 'Risk factors?'] },
+        { name: 'Insights', description: 'Data-driven discoveries', examples: ['Patterns', 'Anomalies', 'Correlations'] },
+        { name: 'Recommendations', description: 'Actionable suggestions', examples: ['Next steps', 'Optimizations', 'Strategies'] },
+        { name: 'Predictions', description: 'Future forecasting', examples: ['Trends', 'Outcomes', 'Scenarios'] },
+        { name: 'Analytics', description: 'Business intelligence', examples: ['KPIs', 'Dashboards', 'Reports'] },
+        { name: 'Automation', description: 'Intelligent workflows', examples: ['Alerts', 'Triggers', 'Actions'] }
+      ],
+      visual: 'intelligence-output',
+      processSteps: [
+        'Natural language understanding of queries',
+        'Context-aware response generation',
+        'Strategic reasoning and analysis',
+        'Confidence scoring and impact assessment'
+      ]
     }
   ];
 
@@ -568,7 +620,7 @@ const WebSummitDemoAnimation = () => {
         }
         return prev + 1;
       });
-    }, 3000);
+    }, 6000); // Aumentado de 3s para 6s para melhor compreensão
   };
 
   const closeAnimation = () => {
@@ -586,7 +638,8 @@ const WebSummitDemoAnimation = () => {
             Experience the <span className="grad">Complete Journey</span>
           </h2>
           <p className="text-slate-300 text-lg max-w-3xl mx-auto mb-8">
-            Watch our adaptive intelligence transform raw data into strategic insights in real-time
+            Experience the complete data journey: from multi-source ingestion through semantic transformation to strategic intelligence. 
+            See how diverse data types become actionable insights with detailed process visualization.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
@@ -613,7 +666,7 @@ const WebSummitDemoAnimation = () => {
           </div>
           
           <p className="text-slate-400 text-sm">
-            Full-screen immersive experience • Perfect for WebSummit presentations
+            Detailed process visualization • Educational experience • Perfect for WebSummit presentations
           </p>
         </div>
       </section>
@@ -697,19 +750,60 @@ const WebSummitDemoAnimation = () => {
           </div>
 
           {/* Data Types Visualization */}
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
             {phases[currentPhase].dataTypes.map((type, index) => (
               <div
-                key={type}
-                className="bg-white/5 rounded-lg p-4 text-center hover:bg-white/10 transition-all duration-300"
+                key={type.name}
+                className="bg-white/5 rounded-lg p-6 text-center hover:bg-white/10 transition-all duration-300 group"
                 style={{
-                  animationDelay: `${index * 0.1}s`,
-                  animation: isAnimating ? 'fadeInUp 0.6s ease-out forwards' : 'none'
+                  animationDelay: `${index * 0.2}s`,
+                  animation: isAnimating ? 'fadeInUp 0.8s ease-out forwards' : 'none'
                 }}
               >
-                <div className="text-sm font-medium text-white">{type}</div>
+                <div className="text-lg font-semibold text-white mb-2 group-hover:text-pulse-cyan transition-colors">
+                  {type.name}
+                </div>
+                <div className="text-sm text-slate-300 mb-3">
+                  {type.description}
+                </div>
+                <div className="space-y-1">
+                  {type.examples.map((example, exIndex) => (
+                    <div 
+                      key={exIndex}
+                      className="text-xs text-pulse-cyan/80 bg-pulse-cyan/10 rounded px-2 py-1"
+                      style={{
+                        animationDelay: `${(index * 0.2) + (exIndex * 0.1)}s`,
+                        animation: isAnimating ? 'fadeInUp 0.6s ease-out forwards' : 'none'
+                      }}
+                    >
+                      {example}
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
+          </div>
+
+          {/* Process Steps */}
+          <div className="mb-12">
+            <h3 className="text-xl font-semibold text-white mb-6 text-center">Process Steps</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {phases[currentPhase].processSteps.map((step, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-4 bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-all duration-300"
+                  style={{
+                    animationDelay: `${index * 0.3}s`,
+                    animation: isAnimating ? 'fadeInUp 0.8s ease-out forwards' : 'none'
+                  }}
+                >
+                  <div className="w-8 h-8 bg-gradient-to-r from-pulse-cyan to-pulse-purple rounded-full flex items-center justify-center text-sm font-bold text-black">
+                    {index + 1}
+                  </div>
+                  <div className="text-slate-300">{step}</div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Progress Bar */}
@@ -718,6 +812,58 @@ const WebSummitDemoAnimation = () => {
               className="bg-gradient-to-r from-pulse-cyan to-pulse-purple h-2 rounded-full transition-all duration-1000"
               style={{ width: `${((currentPhase + 1) / phases.length) * 100}%` }}
             />
+          </div>
+
+          {/* Real-time Statistics */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div className="bg-white/5 rounded-lg p-4 text-center">
+              <div className="text-2xl font-bold text-pulse-cyan mb-1">
+                {phases[currentPhase].id === 'data-ingestion' ? '47K' : 
+                 phases[currentPhase].id === 'vector-embedding' ? '2.3M' :
+                 phases[currentPhase].id === 'adaptive-layer' ? '156K' : '89%'}
+              </div>
+              <div className="text-xs text-slate-400">
+                {phases[currentPhase].id === 'data-ingestion' ? 'Data Sources' : 
+                 phases[currentPhase].id === 'vector-embedding' ? 'Vectors Generated' :
+                 phases[currentPhase].id === 'adaptive-layer' ? 'Model Updates' : 'Accuracy Score'}
+              </div>
+            </div>
+            <div className="bg-white/5 rounded-lg p-4 text-center">
+              <div className="text-2xl font-bold text-pulse-purple mb-1">
+                {phases[currentPhase].id === 'data-ingestion' ? '12TB' : 
+                 phases[currentPhase].id === 'vector-embedding' ? '768D' :
+                 phases[currentPhase].id === 'adaptive-layer' ? '0.1%' : '2.1s'}
+              </div>
+              <div className="text-xs text-slate-400">
+                {phases[currentPhase].id === 'data-ingestion' ? 'Data Volume' : 
+                 phases[currentPhase].id === 'vector-embedding' ? 'Vector Dimensions' :
+                 phases[currentPhase].id === 'adaptive-layer' ? 'LoRA Parameters' : 'Response Time'}
+              </div>
+            </div>
+            <div className="bg-white/5 rounded-lg p-4 text-center">
+              <div className="text-2xl font-bold text-green-400 mb-1">
+                {phases[currentPhase].id === 'data-ingestion' ? '99.9%' : 
+                 phases[currentPhase].id === 'vector-embedding' ? '94%' :
+                 phases[currentPhase].id === 'adaptive-layer' ? '87%' : '€2.1M'}
+              </div>
+              <div className="text-xs text-slate-400">
+                {phases[currentPhase].id === 'data-ingestion' ? 'Uptime' : 
+                 phases[currentPhase].id === 'vector-embedding' ? 'Similarity Score' :
+                 phases[currentPhase].id === 'adaptive-layer' ? 'Confidence' : 'Revenue Impact'}
+              </div>
+            </div>
+            <div className="bg-white/5 rounded-lg p-4 text-center">
+              <div className="text-2xl font-bold text-orange-400 mb-1">
+                {phases[currentPhase].id === 'data-ingestion' ? '24/7' : 
+                 phases[currentPhase].id === 'vector-embedding' ? 'Real-time' :
+                 phases[currentPhase].id === 'adaptive-layer' ? 'Continuous' : 'Strategic'}
+              </div>
+              <div className="text-xs text-slate-400">
+                {phases[currentPhase].id === 'data-ingestion' ? 'Processing' : 
+                 phases[currentPhase].id === 'vector-embedding' ? 'Indexing' :
+                 phases[currentPhase].id === 'adaptive-layer' ? 'Learning' : 'Intelligence'}
+              </div>
+            </div>
           </div>
 
           {/* Phase Counter */}
@@ -827,7 +973,7 @@ const WebSummitDemoAnimation = () => {
                 Journey Complete!
               </h2>
               <p className="text-xl text-slate-300 mb-8">
-                From raw data to strategic intelligence in seconds
+                Complete data transformation: Multi-source ingestion → Vector embedding → Adaptive processing → Strategic intelligence
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
